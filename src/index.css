@@ -7,10 +7,10 @@ body {
 
 header {
   text-align: center;
-  background-color: maroon;
+  background-color: #011936;
   color: white;
   height: auto;
-  border-bottom: 4px solid orangered;
+  border-bottom: 4px solid #829cbc;
 }
 
 header h1 {

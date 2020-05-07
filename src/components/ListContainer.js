@@ -1,49 +1,31 @@
 import React from 'react';
 import Search from './Search';
 import API from '../utils/API';
+import Row from './Row';
 
 export default class DirectoryContainer extends React.Component {
   state = {
-    employees: []
+    employees: [],
+    search: ''
   };
 
   componentDidMount = () => {
     API.getUsers()
-      .then((res) =>
-        this.setState({
-          employees: res.data.results.map((emp) => ({
-            id: emp.id.value,
-            name: `${emp.name.first} ${emp.name.last}`,
-            email: emp.email,
-            phone: emp.phone,
-            dob: new Date(emp.dob.date).toLocaleDateString(),
-            image: emp.picture.medium
-          }))
-        })
-      )
+      .then((employees) => this.setState({ employees }))
       .catch((err) => console.log(err));
   };
 
   renderEmployees = () => {
-    return this.state.employees.map((emp) => (
-      <tr key={emp.id}>
-        <td>
-          <img src={emp.image} alt='Employee Profile' />
-        </td>
-        <td>{emp.name}</td>
-        <td>{emp.phone}</td>
-        <td>
-          <a href={`mailto:${emp.email}`}>{emp.email}</a>
-        </td>
-        <td>{emp.dob}</td>
-      </tr>
-    ));
+    return this.state.employees.map((emp) => <Row employee={emp} />);
   };
 
   render() {
     return (
       <div className='py-2 px-5'>
-        <Search />
+        <Search
+          handleInputChange={(e) => this.setState({ search: e.target.value })}
+          search={this.state.search}
+        />
         <table className='table table-striped'>
           <thead>
             <tr>
