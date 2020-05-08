@@ -31,7 +31,7 @@ const ListContainer = () => {
         emp.name.toLowerCase().includes(filter) ||
         emp.email.toLowerCase().includes(filter) ||
         emp.phone.toLowerCase().includes(filter) ||
-        emp.dob.toLowerCase().includes(filter)
+        emp.dob.toLocaleString().includes(filter)
     );
   };
 
