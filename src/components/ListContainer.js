@@ -16,7 +16,16 @@ export default class DirectoryContainer extends React.Component {
   };
 
   renderEmployees = () => {
-    return this.state.employees.map((emp) => <Row employee={emp} />);
+    const search = this.state.search.toLowerCase();
+    return this.state.employees
+      .filter(
+        (emp) =>
+          emp.name.toLowerCase().includes(search) ||
+          emp.email.toLowerCase().includes(search) ||
+          emp.phone.toLowerCase().includes(search) ||
+          emp.dob.toLowerCase().includes(search)
+      )
+      .map((emp) => <Row employee={emp} />);
   };
 
   render() {
