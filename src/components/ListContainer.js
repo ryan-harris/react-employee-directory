@@ -16,7 +16,7 @@ const ListContainer = () => {
             name: `${emp.name.first} ${emp.name.last}`,
             email: emp.email,
             phone: emp.phone,
-            dob: new Date(emp.dob.date).toLocaleDateString(),
+            dob: new Date(emp.dob.date),
             image: emp.picture.medium
           }))
         )

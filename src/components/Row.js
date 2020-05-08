@@ -11,7 +11,7 @@ const Row = ({ employee }) => {
       <td>
         <a href={`mailto:${employee.email}`}>{employee.email}</a>
       </td>
-      <td>{employee.dob}</td>
+      <td>{employee.dob.toLocaleDateString()}</td>
     </tr>
   );
 };

@@ -40,7 +40,15 @@ const Table = ({ employees }) => {
   const renderEmployees = () => {
     const sortEmployees = [...employees];
     return sortEmployees
-      .sort()
+      .sort((a, b) => {
+        if (a[sort.column] < b[sort.column]) {
+          return sort.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sort.column] > b[sort.column]) {
+          return sort.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      })
       .map((emp) => <Row employee={emp} key={emp.id} />);
   };
 
