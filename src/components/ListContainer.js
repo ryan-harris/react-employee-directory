@@ -1,53 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Search from './Search';
 import API from '../utils/API';
-import Row from './Row';
+import Table from './Table';
 
-export default class DirectoryContainer extends React.Component {
-  state = {
-    employees: [],
-    search: ''
-  };
+const ListContainer = () => {
+  const [employees, setEmployees] = useState([]);
+  const [search, setSearch] = useState('');
 
-  componentDidMount = () => {
+  useEffect(() => {
     API.getUsers()
-      .then((employees) => this.setState({ employees }))
-      .catch((err) => console.log(err));
-  };
-
-  renderEmployees = () => {
-    const search = this.state.search.toLowerCase();
-    return this.state.employees
-      .filter(
-        (emp) =>
-          emp.name.toLowerCase().includes(search) ||
-          emp.email.toLowerCase().includes(search) ||
-          emp.phone.toLowerCase().includes(search) ||
-          emp.dob.toLowerCase().includes(search)
+      .then((res) =>
+        setEmployees(
+          res.data.results.map((emp) => ({
+            id: emp.id.value,
+            name: `${emp.name.first} ${emp.name.last}`,
+            email: emp.email,
+            phone: emp.phone,
+            dob: new Date(emp.dob.date).toLocaleDateString(),
+            image: emp.picture.medium
+          }))
+        )
       )
-      .map((emp) => <Row employee={emp} />);
+      .catch((err) => console.log(err));
+  }, []);
+
+  const filterEmployees = () => {
+    const filter = search.toLowerCase();
+    return employees.filter(
+      (emp) =>
+        emp.name.toLowerCase().includes(filter) ||
+        emp.email.toLowerCase().includes(filter) ||
+        emp.phone.toLowerCase().includes(filter) ||
+        emp.dob.toLowerCase().includes(filter)
+    );
   };
 
-  render() {
-    return (
-      <div className='py-2 px-5'>
-        <Search
-          handleInputChange={(e) => this.setState({ search: e.target.value })}
-          search={this.state.search}
-        />
-        <table className='table table-striped'>
-          <thead>
-            <tr>
-              <th scope='col'>Image</th>
-              <th scope='col'>Name</th>
-              <th scope='col'>Phone</th>
-              <th scope='col'>Email</th>
-              <th scope='col'>DOB</th>
-            </tr>
-          </thead>
-          <tbody>{this.renderEmployees()}</tbody>
-        </table>
-      </div>
-    );
-  }
-}
+  return (
+    <div className='py-2 px-5'>
+      <Search
+        handleInputChange={(e) => setSearch(e.target.value)}
+        search={search}
+      />
+      <Table employees={filterEmployees()} />
+    </div>
+  );
+};
+
+export default ListContainer;

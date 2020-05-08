@@ -2,7 +2,7 @@ import React from 'react';
 
 const Row = ({ employee }) => {
   return (
-    <tr key={employee.id}>
+    <tr>
       <td>
         <img src={employee.image} alt='Employee Profile' />
       </td>
