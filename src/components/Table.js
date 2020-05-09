@@ -59,18 +59,20 @@ const Table = ({ employees }) => {
   };
 
   return (
-    <table className='table table-striped'>
-      <thead>
-        <tr>
-          {renderColumnHeader('Image', false)}
-          {renderColumnHeader('Name', true)}
-          {renderColumnHeader('Phone', true)}
-          {renderColumnHeader('Email', true)}
-          {renderColumnHeader('DOB', true)}
-        </tr>
-      </thead>
-      <tbody>{renderEmployees()}</tbody>
-    </table>
+    <div className='table-responsive'>
+      <table className='table table-striped'>
+        <thead>
+          <tr>
+            {renderColumnHeader('Image', false)}
+            {renderColumnHeader('Name', true)}
+            {renderColumnHeader('Phone', true)}
+            {renderColumnHeader('Email', true)}
+            {renderColumnHeader('DOB', true)}
+          </tr>
+        </thead>
+        <tbody>{renderEmployees()}</tbody>
+      </table>
+    </div>
   );
 };
 

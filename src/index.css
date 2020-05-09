@@ -25,6 +25,11 @@ header p {
   vertical-align: middle;
 }
 
+thead {
+  background-color: #011936;
+  color: white;
+}
+
 th {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
