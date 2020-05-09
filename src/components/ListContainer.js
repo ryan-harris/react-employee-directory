@@ -26,6 +26,7 @@ const ListContainer = () => {
 
   const filterEmployees = () => {
     const filter = search.toLowerCase();
+    // filter by multiple fields
     return employees.filter(
       (emp) =>
         emp.name.toLowerCase().includes(filter) ||
