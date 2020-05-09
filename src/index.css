@@ -38,15 +38,3 @@ th span {
   cursor: pointer;
   padding: 10px;
 }
-
-th span.ascending::after {
-  margin-left: 3px;
-  content: '⯅';
-  display: inline-block;
-}
-
-th span.descending::after {
-  margin-left: 3px;
-  content: '⯆';
-  display: inline-block;
-}

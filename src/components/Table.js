@@ -16,19 +16,21 @@ const Table = ({ employees }) => {
     setSort({ column, direction });
   };
 
-  const getColumnClass = (column) => {
-    return sort.column === column ? sort.direction : undefined;
+  const renderArrow = (column) => {
+    return sort.column === column
+      ? sort.direction === 'ascending'
+        ? ' ⯅'
+        : ' ⯆'
+      : undefined;
   };
 
   const renderColumnHeader = (column, sortable) => {
     return (
       <th scope='col'>
         {sortable ? (
-          <span
-            onClick={() => handleSort(column.toLowerCase())}
-            className={getColumnClass(column.toLowerCase())}
-          >
+          <span onClick={() => handleSort(column.toLowerCase())}>
             {column}
+            {renderArrow(column.toLowerCase())}
           </span>
         ) : (
           column
