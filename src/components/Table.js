@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import Row from './Row';
 
 const Table = ({ employees }) => {
@@ -17,11 +19,13 @@ const Table = ({ employees }) => {
   };
 
   const renderArrow = (column) => {
-    return sort.column === column
-      ? sort.direction === 'ascending'
-        ? ' ⯅'
-        : ' ⯆'
-      : undefined;
+    return sort.column === column ? (
+      sort.direction === 'ascending' ? (
+        <FontAwesomeIcon style={{ marginLeft: '5px' }} icon={faCaretUp} />
+      ) : (
+        <FontAwesomeIcon style={{ marginLeft: '5px' }} icon={faCaretDown} />
+      )
+    ) : undefined;
   };
 
   const renderColumnHeader = (column, sortable) => {
